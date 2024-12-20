@@ -34,6 +34,13 @@ function Sloppo:init()
         "happy new year 1969",
         "you've got a\n"*4,
     }
+    if Game.save_name:upper() == "SHAYY" then
+        local hour = os.date("*t").hour
+        if hour < 8 or hour >= 21 then
+            table.insert(self.dialogue, "streemurr it's late\ngo to bed")
+        end
+        table.insert(self.dialogue, "quests to release\nof chjatper 3")
+    end
 
     -- Check text (automatically has "ENEMY NAME - " at the start)
     self.check = "AT 4 DF 0\n* Cotton heart and button eye\n* Looks just like a fluffy guy."
