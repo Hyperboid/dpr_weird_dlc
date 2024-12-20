@@ -9,8 +9,8 @@ function Sloppo:init()
     self:setActor("sloppo")
 
     -- Enemy health
-    self.max_health = 450
-    self.health = 450
+    self.max_health = 4000
+    self.health = self.max_health
     -- Enemy attack (determines bullet damage)
     self.attack = 4
     -- Enemy defense (usually 0)
