@@ -92,13 +92,14 @@ end
 ------------------------------
 --   Save file detection    --
 ------------------------------
-
+---@return "pacifist"|"neutral"|"geno"? route
+---@return table? full_save
 function SaveChecker:getUTYSave()
     local path = self:fmtWindowsAppDataPath("Local/Undertale_Yellow")
     if #NativeFS.getDirectoryItems(path) == 0 then return end
     local save = NativeFS.newFile(path .. "/Save.sav")
-    print(save:open("r"))
-    return self:parseIni(save)
+    local savedata = self:parseIni(save)
+    return "neutral", savedata
 end
 
 return SaveChecker
