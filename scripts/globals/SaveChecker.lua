@@ -82,6 +82,12 @@ function SaveChecker:parseIni(input)
             current_subkey = {}
             data[line:sub(2, #line - 1)] = current_subkey
         elseif key and value then
+            if value[1] == '"' then
+                value = value:sub(2, #value - 1)
+            end
+            if tonumber(value) then value = tonumber(value) end
+            ---@diagnostic disable-next-line: cast-local-type
+            if tonumber(key) then key = tonumber(key) end
             current_subkey[key] = value
         end
     end
@@ -99,7 +105,13 @@ function SaveChecker:getUTYSave()
     if #NativeFS.getDirectoryItems(path) == 0 then return end
     local save = NativeFS.newFile(path .. "/Save.sav")
     local savedata = self:parseIni(save)
-    return "neutral", savedata
+    local route = "pacifist"
+    if savedata.GenoComplete and (savedata.GenoComplete[4] == 1) then
+        route = "geno"
+    elseif savedata.Save1.EXP > 0 then
+        route = "neutral"
+    end
+    return route, savedata
 end
 
 return SaveChecker
