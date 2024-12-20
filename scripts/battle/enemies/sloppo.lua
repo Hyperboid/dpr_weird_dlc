@@ -63,6 +63,14 @@ function Sloppo:init()
     self.name_timer = 0
 end
 
+function Sloppo:hurt(amount, battler, on_defeat)
+    -- Effectively take 4x damage from Spare Smack
+    if battler.chara.id == "noel" then
+        amount = amount + 3
+    end
+    super.hurt(self, amount, battler, on_defeat)
+end
+
 function Sloppo:update()
     super.update(self)
     self.name_timer = self.name_timer + (DT/0.1)
