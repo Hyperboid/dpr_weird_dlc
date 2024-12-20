@@ -1,0 +1,3 @@
+local SaveChecker = {}
+
+return SaveChecker
